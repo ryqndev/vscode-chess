@@ -61,20 +61,16 @@ export class MainPanel {
     } else {
       // If a webview panel does not already exist create and show a new one
       const panel = window.createWebviewPanel(
-        // Panel view type
-        "showHelloWorld",
-        // Panel title
-        "Hello World",
-        // The editor column the panel should be displayed in
+        "chess",
+        "Chess",
         ViewColumn.One,
-        // Extra panel configurations
         {
           // Enable JavaScript in the webview
           enableScripts: true,
-          // Restrict the webview to only load resources from the `out` and `webview-ui/build` directories
+          // Restrict the webview to only load resources from the `out` and `app/dist` directories
           localResourceRoots: [
             Uri.joinPath(extensionUri, "out"),
-            Uri.joinPath(extensionUri, "webview-ui/build"),
+            Uri.joinPath(extensionUri, "src/app/dist"),
           ],
         }
       );
@@ -115,15 +111,17 @@ export class MainPanel {
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
     // The CSS file from the React build output
     const stylesUri = getUri(webview, extensionUri, [
-      "webview-ui",
-      "build",
+      "src",
+      "app",
+      "dist",
       "assets",
       "index.css",
     ]);
     // The JS file from the React build output
     const scriptUri = getUri(webview, extensionUri, [
-      "webview-ui",
-      "build",
+      "src",
+      "app",
+      "dist",
       "assets",
       "index.js",
     ]);
