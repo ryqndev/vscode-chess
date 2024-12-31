@@ -60,17 +60,13 @@ export const Game = memo(function Game() {
 	}
 
 
-	// const wb_color = new ThemeColor('activityBar.background');
 
-	console.log('@ryqnedv color', (window as any));
 	return (
 		<div className={cn.container}>
 			<div className={cn.board}>
-				{/* {JSON.stringify(wb_color)} */}
 				turn: {turn}
 				<br />
 				<Chessboard
-					customDarkSquareStyle={{ backgroundColor: window.getComputedStyle(document.body).getPropertyValue('--vscode-badge-background') }}
 					id="main"
 					position={fen}
 					onPieceDrop={onDrop}

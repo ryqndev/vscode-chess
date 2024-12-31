@@ -7,7 +7,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   const panel = vscode.commands.registerCommand("chess.startChessGame", () => {
-    vscode.window.showInformationMessage("Started a new chess game");
+    vscode.window.showInformationMessage("Started a new chess gamessd");
     MainPanel.render(context.extensionUri);
   });
 
@@ -19,4 +19,4 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(test);
 }
 
-export function deactivate() {}
+export function deactivate() { }

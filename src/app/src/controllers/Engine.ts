@@ -1,15 +1,11 @@
-import getCrossOriginWorkerURL from 'crossoriginworker';
 
 /**
  * Requires stockfish.wasm.js and stockfish.js to be present in the public/engine folder
  */
-const STOCKFISH_WASM_PUBLIC_PATH = 'engine/stockfish.wasm.js';
+// const STOCKFISH_WASM_PUBLIC_PATH = 'engine/stockfish.wasm.js';
 const STOCKFISH_JS_FALLBACK_PUBLIC_PATH = 'engine/stockfish.js';
 
 const HELLO_WASM_TEST_STRING = Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00);
-
-
-
 
 
 class StockfishEngine {
@@ -17,17 +13,22 @@ class StockfishEngine {
 
     constructor() {
         const wasmSupported = typeof WebAssembly === 'object' && WebAssembly.validate(HELLO_WASM_TEST_STRING);
-        // this.engine = new Worker(wasmSupported ? STOCKFISH_WASM_PUBLIC_PATH : STOCKFISH_JS_FALLBACK_PUBLIC_PATH);
+        const workerUrl = wasmSupported ? STOCKFISH_JS_FALLBACK_PUBLIC_PATH : STOCKFISH_JS_FALLBACK_PUBLIC_PATH;
 
-        getCrossOriginWorkerURL(wasmSupported ? STOCKFISH_WASM_PUBLIC_PATH : STOCKFISH_JS_FALLBACK_PUBLIC_PATH).then((path: string) => {
-            this.engine = new Worker(path);
-        });
+        this.engine = new Worker((workerUrl));
+
+        console.log(workerUrl);
+        // fetch('https://google.com')
+        //     .then(result => result.blob())
+        //     .then(() => {
+        //         // const blobUrl = URL.createObjectURL(blob);
+        //         // new Worker(blobUrl);
+        //     });
     }
 
     // Inits using UCI and starts new game
     start(positionFen?: string) {
         if (!this.engine) return;
-
         this.engine.postMessage('uci');
         this.engine.postMessage('isready');
         this.engine.postMessage('ucinewgame');
