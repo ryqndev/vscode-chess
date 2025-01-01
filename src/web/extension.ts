@@ -7,7 +7,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   const panel = vscode.commands.registerCommand("chess.startChessGame", () => {
-    vscode.window.showInformationMessage("Started a new chess gamessd");
+    vscode.window.showInformationMessage("Started a new chess game");
     MainPanel.render(context.extensionUri);
   });
 

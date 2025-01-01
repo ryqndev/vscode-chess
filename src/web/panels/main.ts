@@ -127,6 +127,13 @@ export class MainPanel {
 			"assets",
 			"index.js",
 		]);
+		const sfUri = getUri(webview, extensionUri, [
+			"src",
+			"app",
+			"dist",
+			"engine",
+			"stockfish.wasm.js",
+		]);
 		console.log('@ryqndev uris', stylesUri, scriptUri);
 
 		const nonce = getNonce();
@@ -142,17 +149,18 @@ export class MainPanel {
             content="
 			default-src 'none';
 			img-src ${webview.cspSource} https: data:;
-			script-src 'nonce-${nonce}' vscode-webview:;
-			worker-src ${webview.cspSource} vscode-webview:;
+			script-src 'nonce-${nonce}' vscode-webview: data:;
+			connect-src 'nonce-${nonce}' vscode-webview: https://github.com;
+			worker-src ${webview.cspSource} vscode-webview: data:;
 			style-src ${webview.cspSource};
             ">
           <link rel="stylesheet" type="text/css" href="${stylesUri}">
           <title>Chess</title>
         </head>
         <body>
-		<img src="https://cdn2.thecatapi.com/images/ebv.jpg"/>
           <div id="root"></div>
           <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
+          <script type="module" nonce="${nonce}" src="${sfUri}"></script>
         </body>
       </html>
     `;
