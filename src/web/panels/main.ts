@@ -149,8 +149,8 @@ export class MainPanel {
             content="
 			default-src 'none';
 			img-src ${webview.cspSource} https: data:;
-			script-src 'nonce-${nonce}' vscode-webview: data:;
-			connect-src 'nonce-${nonce}' vscode-webview: https://github.com;
+			script-src 'nonce-${nonce}' vscode-webview: data: 'unsafe-eval';
+			connect-src 'nonce-${nonce}' vscode-webview: https://ryqndev.github.io;
 			worker-src ${webview.cspSource} vscode-webview: data:;
 			style-src ${webview.cspSource};
             ">

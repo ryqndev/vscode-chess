@@ -599,8 +599,7 @@ function isDataURI(e) {
 }
 var tempDouble,
   tempI64,
-  wasmBinaryFile =
-    "https://github.com/ryqndev/vscode-chess/blob/main/src/app/public/engine/stockfish.wasm?raw=true";
+  wasmBinaryFile = "https://ryqndev.github.io/vscode-chess/stockfish.wasm";
 function getBinary() {
   try {
     if (wasmBinary) return new Uint8Array(wasmBinary);
@@ -644,7 +643,7 @@ function createWasm(e) {
   function o(e) {
     return getBinaryPromise()
       .then(function (e) {
-        return WebAssembly.instantiate(e, r);
+        return WebAssembly.instantiateStreaming(e, r);
       })
       .then(e, function (e) {
         err("failed to asynchronously prepare wasm: " + e), abort(e);
