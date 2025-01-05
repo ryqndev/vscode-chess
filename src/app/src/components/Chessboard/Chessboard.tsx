@@ -1,7 +1,7 @@
-import { memo, RefObject, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, RefObject, useEffect, useMemo, useState } from "react";
 import { Chessboard as ReactChessBoard } from "react-chessboard";
-import { Chess, PieceSymbol, Square } from "chess.js";
-import { ChessboardProps as ReactChessboardProps, PromotionPieceOption } from "react-chessboard/dist/chessboard/types";
+import { Chess } from "chess.js";
+import { ChessboardProps as ReactChessboardProps } from "react-chessboard/dist/chessboard/types";
 
 
 type ChessboardProps = Omit<ReactChessboardProps, 'ref'> & {
@@ -54,7 +54,6 @@ export const Chessboard = memo(function Chessboard({
     }, [container]);
     const boardWidth = useMemo(() => ~~Math.min(dimensions.width, dimensions.height), [dimensions]);
 
-    console.log('@ryqndev width', ~~boardWidth);
     if (!boardWidth) return null;
 
     return (

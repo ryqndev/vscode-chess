@@ -1,0 +1,25 @@
+.container {
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #00000011;
+
+    .table {
+        height: 100%;
+        overflow: scroll;
+
+        .row {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr;
+            padding: 8px;
+
+            &:nth-child(even) {
+                background-color: #00000022;
+            }
+
+            &>div {
+                display: grid;
+                place-content: center;
+            }
+        }
+    }
+}

@@ -134,7 +134,6 @@ export class MainPanel {
 			"engine",
 			"stockfish.wasm.js",
 		]);
-		console.log('@ryqndev uris', stylesUri, scriptUri);
 
 		const nonce = getNonce();
 
