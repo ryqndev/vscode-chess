@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "chess.startChessGame",
-        "title": "Start a new chess game"
+        "command": "chess.startChessPuzzle",
+        "title": "Start a new chess puzzle"
       },
       {
         "command": "chess.test",

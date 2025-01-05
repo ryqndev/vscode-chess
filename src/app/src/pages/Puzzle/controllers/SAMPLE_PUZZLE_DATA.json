@@ -1,0 +1,34 @@
+{
+  "game": {
+    "id": "mHRdTnpg",
+    "perf": {
+      "key": "rapid",
+      "name": "Rapid"
+    },
+    "rated": true,
+    "players": [
+      {
+        "name": "gtrechak",
+        "id": "gtrechak",
+        "color": "white",
+        "rating": 1628
+      },
+      {
+        "name": "Dammit",
+        "id": "dammit",
+        "color": "black",
+        "rating": 1763
+      }
+    ],
+    "pgn": "e4 e5 f4 Qh4+ g3 exf4 Nf3 Qf6 d4 fxg3 Bg5 Qe6 Nc3 Bb4 Qd3 Bxc3+ bxc3 h6 Bh4 gxh2 Rxh2 Nf6 Bh3 Qxe4+",
+    "clock": "7+2"
+  },
+  "puzzle": {
+    "id": "XhEhs",
+    "rating": 1793,
+    "plays": 79698,
+    "solution": ["h2e2", "e8g8", "e2e4"],
+    "themes": ["middlegame", "short", "crushing", "pin", "defensiveMove"],
+    "initialPly": 23
+  }
+}

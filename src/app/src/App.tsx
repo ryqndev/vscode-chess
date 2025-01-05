@@ -1,11 +1,11 @@
-import { Game } from "./pages/Game/Game.js";
+import { Puzzle } from "./pages/Puzzle/Puzzle";
 
 function App() {
-  return (
-    <div>
-      <Game />
-    </div>
-  );
+	return (
+		<div>
+			<Puzzle />
+		</div>
+	);
 }
 
 export default App;

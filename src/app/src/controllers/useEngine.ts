@@ -10,7 +10,6 @@ export const useEngine = (fen?: string) => {
     useEffect(() => {
         Engine.listen(rawMessage => {
             const message = rawMessage.split(' ');
-            console.log(rawMessage);
             switch (message[0]) {
                 case "bestmove":
                     setBestMove(message[1]);

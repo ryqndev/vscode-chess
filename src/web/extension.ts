@@ -6,8 +6,8 @@ export function activate(context: vscode.ExtensionContext) {
     'Congratulations, your extension "chess" is now active in the web extension host!'
   );
 
-  const panel = vscode.commands.registerCommand("chess.startChessGame", () => {
-    vscode.window.showInformationMessage("Started a new chess game");
+  const panel = vscode.commands.registerCommand("chess.startChessPuzzle", () => {
+    vscode.window.showInformationMessage("Started a new chess puzzle");
     MainPanel.render(context.extensionUri);
   });
 

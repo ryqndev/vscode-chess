@@ -12,10 +12,6 @@ class StockfishEngine {
         this.engine.postMessage('uci');
         this.engine.postMessage('isready');
         this.engine.postMessage('ucinewgame');
-
-        this.engine.postMessage('setoption name Skill Level value -1');
-        // this.engine.postMessage('setoption name UCI_Elo value 1320');
-
         this.engine.postMessage(`position ${positionFen ? 'fen ' + positionFen : 'startpos'}`);
         this.engine.postMessage(`go`);
     }
@@ -24,8 +20,6 @@ class StockfishEngine {
         this.engine.postMessage(`position fen ${positionFen}`);
         this.engine.postMessage(`go`);
     }
-
-    // setDifficulty()
 
     listen(onMessage: (message: string) => void) {
         return this.engine.addEventListener('message', event => onMessage(event.data));
