@@ -10,7 +10,7 @@
         .row {
             display: grid;
             grid-template-columns: auto 1fr 1fr;
-            padding: 8px;
+            height: 32px;
 
             &:nth-child(even) {
                 background-color: #00000022;
@@ -19,6 +19,11 @@
             &>div {
                 display: grid;
                 place-content: center;
+                transition: background-color 250ms;
+
+                &:hover {
+                    background-color: #00000011;
+                }
             }
         }
     }
