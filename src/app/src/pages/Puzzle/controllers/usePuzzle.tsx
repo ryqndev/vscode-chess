@@ -5,8 +5,8 @@ import { Chess, PieceSymbol } from "chess.js";
 import { PromotionPieceOption, ChessboardProps as ReactChessboardProps, Square } from "react-chessboard/dist/chessboard/types";
 import { Move } from "../../../components/Chessboard/types";
 
-const LICHESS_PUZZLE_API_ENDPOINT = `https://lichess.org/api/puzzle/next?angle=promotion`;
-const debug = true;
+const LICHESS_PUZZLE_API_ENDPOINT = `https://lichess.org/api/puzzle/next`;
+const debug = false;
 
 type PuzzleProps = Partial<ReactChessboardProps> & {
     game: Chess;
@@ -49,13 +49,9 @@ export const usePuzzle = (): PuzzleProps => {
         promoteFromSquare?: Square,
         promoteToSquare?: Square
     ) {
-        console.log('promo', promoteFromSquare, promoteToSquare, piece.substring(1).toLowerCase());
-
         if (!piece || !promoteFromSquare || !promoteToSquare || !moveList) return false;
 
         const move = promoteFromSquare + promoteToSquare + piece.substring(1).toLowerCase() as PieceSymbol;
-
-        console.log(move);
 
         const [correctMove, response, ...restOfSequence] = moveList;
 
@@ -115,9 +111,6 @@ export const usePuzzle = (): PuzzleProps => {
         setMoveList(puzzle.puzzle.solution);
 
     }, [puzzle, game]);
-
-    window.puzzle = puzzle;
-
 
     return { puzzle, game, fen, onPieceDrop, onPromotionPieceSelect, solved, next };
 };

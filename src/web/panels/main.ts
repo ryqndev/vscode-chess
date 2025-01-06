@@ -149,7 +149,7 @@ export class MainPanel {
 			default-src 'none';
 			img-src ${webview.cspSource} https: data:;
 			script-src 'nonce-${nonce}' vscode-webview: data: 'unsafe-eval';
-			connect-src 'nonce-${nonce}' vscode-webview: https://ryqndev.github.io;
+			connect-src 'nonce-${nonce}' vscode-webview: https://ryqndev.github.io https://lichess.org;
 			worker-src ${webview.cspSource} vscode-webview: data:;
 			style-src ${webview.cspSource};
             ">

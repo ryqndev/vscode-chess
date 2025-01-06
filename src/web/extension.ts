@@ -12,11 +12,6 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   context.subscriptions.push(panel);
-
-  const test = vscode.commands.registerCommand("chess.test", () => {
-    vscode.window.showInformationMessage("Started a new game");
-  });
-  context.subscriptions.push(test);
 }
 
 export function deactivate() { }

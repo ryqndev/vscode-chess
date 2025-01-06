@@ -6,6 +6,8 @@
   "engines": {
     "vscode": "^1.90.0"
   },
+  "repository": "https://github.com/ryqndev/vscode-chess",
+  "publisher": "ryqndev",
   "categories": [
     "Other"
   ],
@@ -16,10 +18,6 @@
       {
         "command": "chess.startChessPuzzle",
         "title": "Start a new chess puzzle"
-      },
-      {
-        "command": "chess.test",
-        "title": "Test chess command"
       }
     ]
   },
