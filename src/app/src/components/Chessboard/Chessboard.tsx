@@ -15,23 +15,6 @@ export const Chessboard = memo(function Chessboard({
     container,
     ...props
 }: ChessboardProps) {
-
-    // function onPromotionPieceSelect(
-    //     piece?: PromotionPieceOption,
-    //     promoteFromSquare?: Square,
-    //     promoteToSquare?: Square
-    // ) {
-    //     if (!piece || !promoteFromSquare || !promoteToSquare) return false;
-    //     makeMove(
-    //         {
-    //             from: promoteFromSquare,
-    //             to: promoteToSquare,
-    //             promotion: piece.substring(1).toLowerCase() as PieceSymbol,
-    //         });
-
-    //     return true;
-    // }
-
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
@@ -61,7 +44,6 @@ export const Chessboard = memo(function Chessboard({
             id="main"
             position={fen}
             boardWidth={boardWidth}
-            // onPromotionPieceSelect={onPromotionPieceSelect}
             {...props}
         />
     );

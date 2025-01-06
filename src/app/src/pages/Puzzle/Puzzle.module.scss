@@ -55,5 +55,27 @@
         &.solved {
             border-color: #57dd3c;
         }
+
+        .actions {
+            display: grid;
+            height: 32px;
+
+            .next {
+                border: 2px solid transparent;
+                color: gray;
+                border-radius: 4px;
+                cursor: pointer;
+
+                transition: border-color 350ms, color 350ms;
+
+                &:hover,
+                .solved {
+                    color: black;
+                    border-color: #00000045;
+                }
+            }
+        }
     }
+
+
 }

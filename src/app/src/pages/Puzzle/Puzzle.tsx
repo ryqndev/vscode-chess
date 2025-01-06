@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 export const Puzzle = memo(function Puzzle() {
 	const container = useRef<HTMLDivElement>(null);
-	const { game, fen, onPieceDrop, solved, next } = usePuzzle();
+	const { game, fen, onPieceDrop, solved, next, onPromotionPieceSelect } = usePuzzle();
 	const [hoveredPos, setHoveredPos] = useState<string>();
 
 	// fen is reactive, game is not
@@ -18,12 +18,12 @@ export const Puzzle = memo(function Puzzle() {
 		<div className={cn.page}>
 			<div className={cn.container}>
 				<div className={cn.board} ref={container}>
-					<Chessboard game={game} fen={hoveredPos ?? fen} onPieceDrop={onPieceDrop} container={container} />
+					<Chessboard game={game} fen={hoveredPos ?? fen} onPieceDrop={onPieceDrop} container={container} onPromotionPieceSelect={onPromotionPieceSelect} />
 				</div>
 				<div className={clsx(cn.moves, solved && cn.solved)}>
 					<MoveHistory history={history} setHoveredPos={setHoveredPos} />
 					<div className={cn.actions}>
-						<button onClick={next}>New Puzzle</button>
+						<button className={clsx(cn.next, solved && cn.solved)} onClick={next}>New Puzzle</button>
 					</div>
 				</div>
 			</div>

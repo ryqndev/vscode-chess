@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Puzzle } from "../types";
 import SAMPLE_PUZZLE_DATA from './SAMPLE_PUZZLE_DATA.json';
-import { Chess } from "chess.js";
-import { ChessboardProps as ReactChessboardProps, Square } from "react-chessboard/dist/chessboard/types";
+import { Chess, PieceSymbol } from "chess.js";
+import { PromotionPieceOption, ChessboardProps as ReactChessboardProps, Square } from "react-chessboard/dist/chessboard/types";
 import { Move } from "../../../components/Chessboard/types";
 
-const LICHESS_PUZZLE_API_ENDPOINT = `https://lichess.org/api/puzzle/next`;
+const LICHESS_PUZZLE_API_ENDPOINT = `https://lichess.org/api/puzzle/next?angle=promotion`;
 const debug = true;
 
 type PuzzleProps = Partial<ReactChessboardProps> & {
@@ -44,15 +44,23 @@ export const usePuzzle = (): PuzzleProps => {
         fetch(LICHESS_PUZZLE_API_ENDPOINT).then(res => res.json()).then(setPuzzle);
     }, []);
 
-    const onPieceDrop = useCallback((sourceSquare: Square, targetSquare: Square) => {
-        if (!moveList) return false;
+    function onPromotionPieceSelect(
+        piece?: PromotionPieceOption,
+        promoteFromSquare?: Square,
+        promoteToSquare?: Square
+    ) {
+        console.log('promo', promoteFromSquare, promoteToSquare, piece.substring(1).toLowerCase());
 
-        const move = sourceSquare + targetSquare;
+        if (!piece || !promoteFromSquare || !promoteToSquare || !moveList) return false;
+
+        const move = promoteFromSquare + promoteToSquare + piece.substring(1).toLowerCase() as PieceSymbol;
+
+        console.log(move);
+
         const [correctMove, response, ...restOfSequence] = moveList;
 
         if (move !== correctMove) {
-            alert('U made a big mistake buddy');
-            return true;
+            return false;
         }
 
         makeMove(move);
@@ -67,7 +75,30 @@ export const usePuzzle = (): PuzzleProps => {
             setMoveList(restOfSequence);
         }, 300);
         return true;
+    }
 
+    const onPieceDrop = useCallback((sourceSquare: Square, targetSquare: Square) => {
+        if (!moveList) return false;
+
+        const move = sourceSquare + targetSquare;
+        const [correctMove, response, ...restOfSequence] = moveList;
+
+        if (move !== correctMove) {
+            return false;
+        }
+
+        makeMove(move);
+
+        // correctly solved puzzle
+        if (!response) {
+            setSolved(true);
+            return true;
+        }
+        setTimeout(() => {
+            makeMove(response);
+            setMoveList(restOfSequence);
+        }, 300);
+        return true;
     }, [moveList, makeMove]);
 
     useEffect(() => {
@@ -82,7 +113,11 @@ export const usePuzzle = (): PuzzleProps => {
         setFen(game.fen());
         setSolved(false);
         setMoveList(puzzle.puzzle.solution);
+
     }, [puzzle, game]);
 
-    return { puzzle, game, fen, onPieceDrop, solved, next };
+    window.puzzle = puzzle;
+
+
+    return { puzzle, game, fen, onPieceDrop, onPromotionPieceSelect, solved, next };
 };

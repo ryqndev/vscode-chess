@@ -2,6 +2,7 @@
     border-radius: 4px;
     overflow: hidden;
     background-color: #00000011;
+    font-family: "Outfit", serif;
 
     .table {
         height: 100%;
@@ -9,17 +10,23 @@
 
         .row {
             display: grid;
-            grid-template-columns: auto 1fr 1fr;
+            grid-template-columns: 60px 1fr 1fr;
             height: 32px;
 
             &:nth-child(even) {
                 background-color: #00000022;
             }
 
-            &>div {
+            .idx {
                 display: grid;
                 place-content: center;
+            }
+
+            .move {
+                display: grid;
+                place-content: center start;
                 transition: background-color 250ms;
+                padding: 0 8px;
 
                 &:hover {
                     background-color: #00000011;
