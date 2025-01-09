@@ -1,6 +1,6 @@
 {
   "name": "ryqndev-chess",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "displayName": "Chess",
   "description": "Negative productivity VSCode extension to play chess directly in your IDE against a configurable AI backed by stockfish.",
   "engines": {
@@ -13,6 +13,9 @@
   ],
   "activationEvents": [],
   "browser": "./dist/web/extension.js",
+  "files": [
+    "src/app/dist"
+  ],
   "contributes": {
     "commands": [
       {
