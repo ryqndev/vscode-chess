@@ -69,6 +69,8 @@ export class MainPanel {
 				{
 					// Enable JavaScript in the webview
 					enableScripts: true,
+					// maybe save these locally
+					retainContextWhenHidden: true,
 					// Restrict the webview to only load resources from the `out` and `app/dist` directories
 					localResourceRoots: [
 						Uri.joinPath(extensionUri, "out"),
