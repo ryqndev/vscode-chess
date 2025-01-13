@@ -21,6 +21,8 @@ type PuzzleProps = Partial<ReactChessboardProps> & {
     puzzle?: Puzzle;
 
 
+    startingSide: boolean;
+
 }
 
 export const usePuzzle = (): PuzzleProps => {
@@ -109,8 +111,11 @@ export const usePuzzle = (): PuzzleProps => {
         setFen(game.fen());
         setSolved(false);
         setMoveList(puzzle.puzzle.solution);
-
     }, [puzzle, game]);
 
-    return { puzzle, game, fen, onPieceDrop, onPromotionPieceSelect, solved, next };
+    const startingSide = useMemo(() =>
+        Boolean((puzzle?.game.pgn.split(' ').length ?? 0) % 2)
+        , [puzzle]);
+
+    return { puzzle, game, fen, onPieceDrop, onPromotionPieceSelect, solved, next, startingSide };
 };

@@ -44,6 +44,9 @@ export const Chessboard = memo(function Chessboard({
             id="main"
             position={fen}
             boardWidth={boardWidth}
+            // customDarkSquareStyle={{ backgroundColor: '#000' }}
+            // customLightSquareStyle={{ backgroundColor: '#151515' }}
+
             {...props}
         />
     );
