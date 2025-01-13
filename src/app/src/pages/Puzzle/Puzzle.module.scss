@@ -73,7 +73,7 @@
                 transition: border-color 350ms, color 350ms;
 
                 &:hover,
-                .solved {
+                &.solved {
                     color: black;
                     border-color: #00000045;
                     background-color: white;
