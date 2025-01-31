@@ -1,9 +1,11 @@
 import { Puzzle } from "./pages/Puzzle/Puzzle";
+import { Stats } from "./pages/Stats/Stats";
 
 function App() {
 	return (
 		<div>
-			<Puzzle />
+			{/* <Puzzle /> */}
+			<Stats />
 		</div>
 	);
 }

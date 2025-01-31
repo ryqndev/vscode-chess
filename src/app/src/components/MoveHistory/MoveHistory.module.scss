@@ -25,12 +25,26 @@
             .move {
                 display: grid;
                 place-content: center start;
-                transition: background-color 250ms;
+                transition: background-color 250ms, border-color 250ms;
+                border-radius: 2px;
                 padding: 0 8px;
+
+                border: none;
+                background-color: transparent;
+                cursor: pointer;
+                border: 2px solid transparent;
+
+                margin-right: 12px;
+
 
                 &:hover {
                     background-color: #00000011;
                 }
+
+                &.selected {
+                    border-color: black;
+                }
+
             }
         }
     }

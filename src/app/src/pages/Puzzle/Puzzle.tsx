@@ -1,23 +1,20 @@
 import cn from "./Puzzle.module.scss";
-import { memo, useEffect, useMemo, useRef, useState } from "react";
-import { Chessboard } from "../../components/Chessboard/Chessboard.js";
-import { usePuzzle } from "./controllers/usePuzzle.js";
-import { MoveHistory } from "../../components/MoveHistory/MoveHistory.js";
-import clsx from "clsx";
+import { memo, useEffect, useRef, useState } from "react";
+import { Chessboard } from "../../components/Chessboard/Chessboard";
+import { usePuzzle } from "./controllers/usePuzzle";
+import { usePuzzleStore } from "./controllers/puzzle-store";
+import { useShallow } from "zustand/shallow";
+import { SidePanel } from "./components/SidePanel/SidePanel";
 
 export const Puzzle = memo(function Puzzle() {
 	const container = useRef<HTMLDivElement>(null);
-	const { game, fen, onPieceDrop, solved, next, onPromotionPieceSelect, startingSide } = usePuzzle();
+	const { fen } = usePuzzleStore(useShallow(({ fen }) => ({ fen })));
+	const { game, onPieceDrop, next, onPromotionPieceSelect } = usePuzzle();
 	const [hoveredPos, setHoveredPos] = useState<string>();
 
 	useEffect(() => {
-		// localStorage.setItem('@ryqndev/test', "test value");
-		// console.log('@ryqndev', Memo);
-	}, []);
-
-	// fen is reactive, game is not
-	// eslint-disable-next-line 
-	const history = useMemo(() => game.history({ verbose: true }), [fen]);
+		next();
+	}, [next]);
 
 	return (
 		<div className={cn.page}>
@@ -25,20 +22,16 @@ export const Puzzle = memo(function Puzzle() {
 				<div className={cn.board} ref={container}>
 					<Chessboard
 						game={game}
+						// invisibleMode={1}
 						fen={hoveredPos ?? fen}
 						onPieceDrop={onPieceDrop}
 						container={container}
 						arePremovesAllowed={true}
 						onPromotionPieceSelect={onPromotionPieceSelect}
+
 					/>
 				</div>
-				<div className={clsx(cn.moves, solved && cn.solved)}>
-					<h2>{startingSide ? 'Black' : "White"} to move</h2>
-					<MoveHistory history={history} setHoveredPos={setHoveredPos} />
-					<div className={cn.actions}>
-						<button className={clsx(cn.next, solved && cn.solved)} onClick={next}>{solved ? "New" : "Skip"} Puzzle</button>
-					</div>
-				</div>
+				<SidePanel setHoveredPos={setHoveredPos} />
 			</div>
 		</div>
 	);

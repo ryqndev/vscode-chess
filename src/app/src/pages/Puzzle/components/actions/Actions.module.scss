@@ -1,0 +1,26 @@
+.next {
+    display: grid;
+    place-content: center;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+
+    transition: border-color 250ms, background-color 250ms;
+
+    svg {
+        fill: #444;
+        transition: fill 250ms;
+    }
+
+    &:hover {
+        border-color: #00000045;
+    }
+
+    &.solved {
+        background-color: rgb(100, 210, 100);
+
+        svg {
+            fill: #fff;
+        }
+    }
+}

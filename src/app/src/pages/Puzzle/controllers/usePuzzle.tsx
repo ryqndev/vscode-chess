@@ -1,65 +1,52 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Puzzle } from "../types";
+import { useCallback, useEffect, useMemo } from "react";
 import SAMPLE_PUZZLE_DATA from './SAMPLE_PUZZLE_DATA.json';
 import { Chess, PieceSymbol } from "chess.js";
 import { PromotionPieceOption, ChessboardProps as ReactChessboardProps, Square } from "react-chessboard/dist/chessboard/types";
 import { Move } from "../../../components/Chessboard/types";
+import { useShallow } from "zustand/shallow";
+import { usePuzzleStore, game } from "./puzzle-store";
 
 const LICHESS_PUZZLE_API_ENDPOINT = `https://lichess.org/api/puzzle/next`;
-const debug = false;
+
+const SIMULATE_OPPONENT_THINK_TIME_MS = 300;
 
 type PuzzleProps = Partial<ReactChessboardProps> & {
     game: Chess;
-    fen: string;
-
-    solved: boolean;
 
     // gets next puzzle
     next: () => void;
 
-    // intiially undefined, guaranteed value after API call
-    puzzle?: Puzzle;
-
-
+    // side that starts in puzzle
     startingSide: boolean;
-
 }
 
 export const usePuzzle = (): PuzzleProps => {
-    const game = useMemo(() => new Chess(), []);
-
-    // Chess isn't reactive, so will use the fen representation
-    // of the game to trigger react updates. Every time board state changes,
-    // should not only update the game object but also the fen state
-    const [fen, setFen] = useState(() => game.fen());
-    const [solved, setSolved] = useState(false);
-
-    const [puzzle, setPuzzle] = useState<Puzzle>();
-    const [moveList, setMoveList] = useState<string[]>();
+    const { puzzle, setPuzzle } = usePuzzleStore(useShallow(({ puzzle, setPuzzle }) => ({ puzzle, setPuzzle })));
+    const { moveList, setMoveList } = usePuzzleStore(useShallow(({ moveList, setMoveList }) => ({ moveList, setMoveList })));
+    const { setSolved, setFen } = usePuzzleStore(useShallow(({ setFen, setSolved }) => ({ setFen, setSolved })));
 
     const makeMove = useCallback((move: Move) => {
         game.move(move);
         setFen(game.fen());
-    }, [game]);
+    }, [setFen]);
 
     const next = useCallback(() => {
-        fetch(LICHESS_PUZZLE_API_ENDPOINT).then(res => res.json()).then(setPuzzle);
-    }, []);
+        setPuzzle(SAMPLE_PUZZLE_DATA);
+        // fetch(LICHESS_PUZZLE_API_ENDPOINT).then(res => res.json()).then(setPuzzle);
+    }, [setPuzzle]);
 
-    function onPromotionPieceSelect(
+    const onPromotionPieceSelect = useCallback((
         piece?: PromotionPieceOption,
         promoteFromSquare?: Square,
         promoteToSquare?: Square
-    ) {
+    ) => {
         if (!piece || !promoteFromSquare || !promoteToSquare || !moveList) return false;
 
         const move = promoteFromSquare + promoteToSquare + piece.substring(1).toLowerCase() as PieceSymbol;
 
         const [correctMove, response, ...restOfSequence] = moveList;
 
-        if (move !== correctMove) {
-            return false;
-        }
+        if (move !== correctMove) return false;
 
         makeMove(move);
 
@@ -71,9 +58,9 @@ export const usePuzzle = (): PuzzleProps => {
         setTimeout(() => {
             makeMove(response);
             setMoveList(restOfSequence);
-        }, 300);
+        }, SIMULATE_OPPONENT_THINK_TIME_MS);
         return true;
-    }
+    }, [makeMove, moveList, setMoveList, setSolved]);
 
     const onPieceDrop = useCallback((sourceSquare: Square, targetSquare: Square) => {
         if (!moveList) return false;
@@ -95,14 +82,9 @@ export const usePuzzle = (): PuzzleProps => {
         setTimeout(() => {
             makeMove(response);
             setMoveList(restOfSequence);
-        }, 300);
+        }, SIMULATE_OPPONENT_THINK_TIME_MS);
         return true;
-    }, [moveList, makeMove]);
-
-    useEffect(() => {
-        if (debug) return setPuzzle(SAMPLE_PUZZLE_DATA);
-        next();
-    }, [next]);
+    }, [makeMove, moveList, setMoveList, setSolved]);
 
     useEffect(() => {
         if (!puzzle) return;
@@ -111,11 +93,11 @@ export const usePuzzle = (): PuzzleProps => {
         setFen(game.fen());
         setSolved(false);
         setMoveList(puzzle.puzzle.solution);
-    }, [puzzle, game]);
+    }, [setMoveList, setFen, setSolved, puzzle]);
 
     const startingSide = useMemo(() =>
         Boolean((puzzle?.game.pgn.split(' ').length ?? 0) % 2)
         , [puzzle]);
 
-    return { puzzle, game, fen, onPieceDrop, onPromotionPieceSelect, solved, next, startingSide };
+    return { game, onPieceDrop, onPromotionPieceSelect, next, startingSide };
 };
