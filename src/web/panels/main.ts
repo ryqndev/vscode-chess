@@ -31,7 +31,7 @@ export class MainPanel {
 	 * @param panel A reference to the webview panel
 	 * @param extensionUri The URI of the directory containing the extension
 	 */
-	private constructor(panel: WebviewPanel, extensionUri: Uri) {
+	private constructor(panel: WebviewPanel, extensionUri: Uri, page: string) {
 		this._panel = panel;
 
 		// Set an event listener to listen for when the panel is disposed (i.e. when the user closes
@@ -41,7 +41,8 @@ export class MainPanel {
 		// Set the HTML content for the webview panel
 		this._panel.webview.html = this._getWebviewContent(
 			this._panel.webview,
-			extensionUri
+			extensionUri,
+			page
 		);
 
 		// this._panel.webview 
@@ -56,7 +57,7 @@ export class MainPanel {
 	 *
 	 * @param extensionUri The URI of the directory containing the extension.
 	 */
-	public static render(extensionUri: Uri) {
+	public static render(extensionUri: Uri, page: string) {
 		if (MainPanel.currentPanel) {
 			// If the webview panel already exists reveal it
 			MainPanel.currentPanel._panel.reveal(ViewColumn.One);
@@ -79,7 +80,7 @@ export class MainPanel {
 				}
 			);
 
-			MainPanel.currentPanel = new MainPanel(panel, extensionUri);
+			MainPanel.currentPanel = new MainPanel(panel, extensionUri, page);
 		}
 	}
 
@@ -112,7 +113,7 @@ export class MainPanel {
 	 * @returns A template string literal containing the HTML that should be
 	 * rendered within the webview panel
 	 */
-	private _getWebviewContent(webview: Webview, extensionUri: Uri) {
+	private _getWebviewContent(webview: Webview, extensionUri: Uri, page: string) {
 		// The CSS file from the React build output
 		const stylesUri = getUri(webview, extensionUri, [
 			"src",
@@ -141,7 +142,7 @@ export class MainPanel {
 
 		return /*html*/ `
       <!DOCTYPE html>
-      <html lang="en">
+      <html lang="en" data-page="${page}">
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />

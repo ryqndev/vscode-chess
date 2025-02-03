@@ -8,7 +8,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const panel = vscode.commands.registerCommand("chess.startChessPuzzle", () => {
     vscode.window.showInformationMessage("Started a new chess puzzle");
-    MainPanel.render(context.extensionUri);
+    MainPanel.render(context.extensionUri, "puzzle");
   });
 
   context.subscriptions.push(panel);

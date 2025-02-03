@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from "react";
-import SAMPLE_PUZZLE_DATA from './SAMPLE_PUZZLE_DATA.json';
+// import SAMPLE_PUZZLE_DATA from './SAMPLE_PUZZLE_DATA.json';
 import { Chess, PieceSymbol } from "chess.js";
 import { PromotionPieceOption, ChessboardProps as ReactChessboardProps, Square } from "react-chessboard/dist/chessboard/types";
 import { Move } from "../../../components/Chessboard/types";
