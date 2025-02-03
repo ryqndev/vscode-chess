@@ -17,23 +17,25 @@ export const MainPanel = memo(function MainPanel({ hoveredPos }: { hoveredPos?: 
     if (!puzzle) return null;
 
     return (
-        <div className={cn.main}>
-            <div className={clsx(cn.player, cn.top)}>
-                {puzzle.game.players[1].name} [{puzzle.game.players[1].rating}]
-            </div>
-            <div className={cn.board} ref={container} >
-                <Chessboard
-                    game={game}
-                    // invisibleMode={1}
-                    fen={hoveredPos ?? fen}
-                    onPieceDrop={onPieceDrop}
-                    container={container}
-                    arePremovesAllowed={true}
-                    onPromotionPieceSelect={onPromotionPieceSelect}
-                />
-            </div>
-            <div className={clsx(cn.player, cn.bottom)}>
-                {puzzle.game.players[0].name} [{puzzle.game.players[0].rating}]
+        <div className={cn.container}>
+            <div className={cn.main}>
+                <div className={clsx(cn.player, cn.top)}>
+                    {puzzle.game.players[1].name} [{puzzle.game.players[1].rating}]
+                </div>
+                <div className={cn.board} ref={container} >
+                    <Chessboard
+                        game={game}
+                        // invisibleMode={1}
+                        fen={hoveredPos ?? fen}
+                        onPieceDrop={onPieceDrop}
+                        container={container}
+                        arePremovesAllowed={true}
+                        onPromotionPieceSelect={onPromotionPieceSelect}
+                    />
+                </div>
+                <div className={clsx(cn.player, cn.bottom)}>
+                    {puzzle.game.players[0].name} [{puzzle.game.players[0].rating}]
+                </div>
             </div>
         </div>
     );

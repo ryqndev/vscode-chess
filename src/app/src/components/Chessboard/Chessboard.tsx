@@ -3,6 +3,7 @@ import { Chessboard as ReactChessBoard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { ChessboardProps as ReactChessboardProps } from "react-chessboard/dist/chessboard/types";
 import cn from './Chessboard.module.scss';
+import { usePieceClick } from "./hooks/usePieceClick";
 
 type ChessboardProps = Omit<ReactChessboardProps, 'ref'> & {
     fen: string;
@@ -17,6 +18,7 @@ export const Chessboard = memo(function Chessboard({
     invisibleMode,
     ...props
 }: ChessboardProps) {
+    const pieceClickProps = usePieceClick(props.onPieceDrop);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
@@ -33,10 +35,9 @@ export const Chessboard = memo(function Chessboard({
 
         observer.observe(container.current);
 
-        return () => {
-            observer.disconnect();
-        };
+        return () => observer.disconnect();
     }, [container]);
+
 
     const boardStyles = useMemo(() => invisibleMode !== undefined ? {
         customDarkSquareStyle: { backgroundColor: `rgba(100, 100, 100, ${invisibleMode.toFixed(2)})` },
@@ -55,6 +56,7 @@ export const Chessboard = memo(function Chessboard({
                 position={fen}
                 boardWidth={boardWidth}
                 {...boardStyles}
+                {...pieceClickProps}
                 {...props}
             />
         </div>
