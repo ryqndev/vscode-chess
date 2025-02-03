@@ -18,6 +18,7 @@ type PuzzleProps = Partial<ReactChessboardProps> & {
 
     // side that starts in puzzle
     startingSide: boolean;
+
 }
 
 export const usePuzzle = (): PuzzleProps => {

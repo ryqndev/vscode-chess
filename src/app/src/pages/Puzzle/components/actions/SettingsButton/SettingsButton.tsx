@@ -3,7 +3,7 @@ import Tooltip from "rc-tooltip";
 import { memo, useCallback } from "react";
 import cn from '../Actions.module.scss';
 
-import SettingsIcon from './settings.svg';
+import SettingsIcon from './settings.svg?react';
 
 export const SettingsButton = memo(function SettingsButton() {
     const onClick = useCallback(() => { }, []);

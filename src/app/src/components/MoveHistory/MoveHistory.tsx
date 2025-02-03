@@ -31,10 +31,6 @@ export const MoveHistory = memo(function MoveHistory({ history, selected, setSel
         setSelected(prev => prev === moveNum ? undefined : moveNum);
     }, [setSelected]);
 
-    // const clearHoveredPos = useCallback(() => {
-    //     setHoveredPos(undefined);
-    // }, [setHoveredPos]);
-
     useLayoutEffect(() => {
         ref.current?.scrollTo({
             top: ref.current.scrollHeight,

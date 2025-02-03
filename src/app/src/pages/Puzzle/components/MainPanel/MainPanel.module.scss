@@ -1,0 +1,42 @@
+.main {
+    // --height: clamp(300px, calc(90vw - 360px), calc(100% - 112px));
+
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 36px 1fr 36px;
+    gap: 20px;
+
+    .player {
+        display: grid;
+        width: max-content;
+        height: max-content;
+        padding: 0 12px;
+        place-content: center;
+        border-radius: 8px;
+
+        height: 36px;
+
+        &.top {
+            place-self: end start;
+
+            background-color: black;
+            color: white;
+        }
+
+        &.bottom {
+            place-self: start end;
+
+            background-color: white;
+            color: black;
+        }
+    }
+
+    .board {
+        height: 100%;
+        width: 100%;
+
+        display: grid;
+        place-content: center;
+    }
+}

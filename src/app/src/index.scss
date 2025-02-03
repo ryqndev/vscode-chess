@@ -4,5 +4,17 @@ html {
     background-color: transparent;
     font-family: "Outfit", serif;
 
-    // background-color: #000;
+    background-color: #40465b;
+}
+
+.rc-tooltip {
+    position: fixed;
+    opacity: 1;
+
+    pointer-events: none;
+    transition: opacity 250m;
+
+    &.rc-tooltip-hidden {
+        opacity: 0;
+    }
 }

@@ -12,7 +12,7 @@ export const NextPuzzleButton = memo(function NextPuzzleButton() {
     const { next } = usePuzzle();
 
     return (
-        <Tooltip placement="top" overlay={<span>{solved ? "New" : "Skip"} Puzzle</span>}>
+        <Tooltip placement="top" overlay={<span>{solved ? "Next" : "Skip"} Puzzle</span>}>
             <button className={clsx(cn.next, solved && cn.solved)} onClick={next}>
                 {solved ? <NextIcon /> : <SkipIcon />}
             </button>
