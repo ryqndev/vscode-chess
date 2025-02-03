@@ -8,7 +8,7 @@ import { usePuzzleStore, game } from "./puzzle-store";
 
 const LICHESS_PUZZLE_API_ENDPOINT = `https://lichess.org/api/puzzle/next`;
 
-const SIMULATE_OPPONENT_THINK_TIME_MS = 300;
+const SIMULATE_OPPONENT_THINK_TIME_MS = 500;
 
 type PuzzleProps = Partial<ReactChessboardProps> & {
     game: Chess;
@@ -32,8 +32,8 @@ export const usePuzzle = (): PuzzleProps => {
     }, [setFen]);
 
     const next = useCallback(() => {
-        setPuzzle(SAMPLE_PUZZLE_DATA);
-        // fetch(LICHESS_PUZZLE_API_ENDPOINT).then(res => res.json()).then(setPuzzle);
+        // setPuzzle(SAMPLE_PUZZLE_DATA);
+        fetch(LICHESS_PUZZLE_API_ENDPOINT).then(res => res.json()).then(setPuzzle);
     }, [setPuzzle]);
 
     const onPromotionPieceSelect = useCallback((
