@@ -17,21 +17,22 @@
         padding: 0 12px;
         place-content: center;
         border-radius: 8px;
+        background-color: white;
+        color: black;
 
         height: 36px;
 
         &.top {
             place-self: end start;
-
-            background-color: black;
-            color: white;
         }
 
         &.bottom {
             place-self: start end;
+        }
 
-            background-color: white;
-            color: black;
+        &.black {
+            background-color: black;
+            color: white;
         }
     }
 

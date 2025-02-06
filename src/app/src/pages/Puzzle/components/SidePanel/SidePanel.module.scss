@@ -13,6 +13,10 @@
 
     h2 {
         margin: 0;
+
+        &::first-letter {
+            text-transform: capitalize;
+        }
     }
 
     .actions {

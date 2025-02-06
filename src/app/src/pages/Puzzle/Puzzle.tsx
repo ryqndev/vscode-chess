@@ -1,11 +1,11 @@
 import cn from "./Puzzle.module.scss";
 import { memo, useEffect, useState } from "react";
-import { usePuzzle } from "./controllers/usePuzzle";
 import { SidePanel } from "./components/SidePanel/SidePanel";
 import { MainPanel } from "./components/MainPanel/MainPanel";
+import { useGetNextPuzzle } from "./controllers/useGetNextPuzzle";
 
 export const Puzzle = memo(function Puzzle() {
-	const { next } = usePuzzle();
+	const next = useGetNextPuzzle();
 	const [hoveredPos, setHoveredPos] = useState<string>();
 
 	useEffect(() => {

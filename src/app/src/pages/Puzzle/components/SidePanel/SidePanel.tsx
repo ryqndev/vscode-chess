@@ -15,7 +15,7 @@ const MOVE_ANIMATION_TIME_MS = 500;
 
 export const SidePanel = memo(function SidePanel({ setHoveredPos }: SidePanelProps) {
     const { solved, fen } = usePuzzleStore();
-    const { startingSide } = usePuzzle();
+    const { boardOrientation } = usePuzzle();
     const [selected, setSelected] = useState<number>();
 
     // fen is reactive, game is not
@@ -31,7 +31,7 @@ export const SidePanel = memo(function SidePanel({ setHoveredPos }: SidePanelPro
 
     return (
         <div className={clsx(cn.panel, solved && cn.solved)}>
-            <h2>{startingSide ? 'Black' : "White"} to move</h2>
+            <h2>{boardOrientation} to move</h2>
             <MoveHistory history={history} selected={selected} setSelected={setSelected} />
             <div className={cn.actions}>
                 <SettingsButton />

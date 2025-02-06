@@ -1,28 +1,18 @@
 import { useCallback, useEffect, useMemo } from "react";
-// import SAMPLE_PUZZLE_DATA from './SAMPLE_PUZZLE_DATA.json';
 import { Chess, PieceSymbol } from "chess.js";
 import { PromotionPieceOption, ChessboardProps as ReactChessboardProps, Square } from "react-chessboard/dist/chessboard/types";
 import { Move } from "../../../components/Chessboard/types";
 import { useShallow } from "zustand/shallow";
 import { usePuzzleStore, game } from "./puzzle-store";
 
-const LICHESS_PUZZLE_API_ENDPOINT = `https://lichess.org/api/puzzle/next`;
-
 const SIMULATE_OPPONENT_THINK_TIME_MS = 500;
 
 type PuzzleProps = Partial<ReactChessboardProps> & {
     game: Chess;
-
-    // gets next puzzle
-    next: () => void;
-
-    // side that starts in puzzle
-    startingSide: boolean;
-
 }
 
 export const usePuzzle = (): PuzzleProps => {
-    const { puzzle, setPuzzle } = usePuzzleStore(useShallow(({ puzzle, setPuzzle }) => ({ puzzle, setPuzzle })));
+    const { puzzle } = usePuzzleStore(useShallow(({ puzzle, setPuzzle }) => ({ puzzle, setPuzzle })));
     const { moveList, setMoveList } = usePuzzleStore(useShallow(({ moveList, setMoveList }) => ({ moveList, setMoveList })));
     const { setSolved, setFen } = usePuzzleStore(useShallow(({ setFen, setSolved }) => ({ setFen, setSolved })));
 
@@ -30,11 +20,6 @@ export const usePuzzle = (): PuzzleProps => {
         game.move(move);
         setFen(game.fen());
     }, [setFen]);
-
-    const next = useCallback(() => {
-        // setPuzzle(SAMPLE_PUZZLE_DATA);
-        fetch(LICHESS_PUZZLE_API_ENDPOINT).then(res => res.json()).then(setPuzzle);
-    }, [setPuzzle]);
 
     const onPromotionPieceSelect = useCallback((
         piece?: PromotionPieceOption,
@@ -91,14 +76,15 @@ export const usePuzzle = (): PuzzleProps => {
         if (!puzzle) return;
 
         game.loadPgn(puzzle?.game.pgn);
+        console.log('@ryqndev', puzzle);
         setFen(game.fen());
         setSolved(false);
         setMoveList(puzzle.puzzle.solution);
     }, [setMoveList, setFen, setSolved, puzzle]);
 
     const startingSide = useMemo(() =>
-        Boolean((puzzle?.game.pgn.split(' ').length ?? 0) % 2)
+        (puzzle?.game.pgn.split(' ').length ?? 0) % 2 ? "black" : "white"
         , [puzzle]);
 
-    return { game, onPieceDrop, onPromotionPieceSelect, next, startingSide };
+    return { game, onPieceDrop, boardOrientation: startingSide, onPromotionPieceSelect };
 };
