@@ -8,9 +8,7 @@ export const Puzzle = memo(function Puzzle() {
 	const next = useGetNextPuzzle();
 	const [hoveredPos, setHoveredPos] = useState<string>();
 
-	useEffect(() => {
-		next();
-	}, [next]);
+	useEffect(next, [next]);
 
 	return (
 		<div className={cn.page}>

@@ -1,6 +1,7 @@
 import { Chess } from 'chess.js';
 import { create } from 'zustand';
 import { Puzzle } from '../types';
+import PUZZLE_LOAD_STATE from './puzzle-load-state.json';
 
 // Chess isn't reactive, so will use the fen representation
 // of the game to trigger react updates. Every time board state changes,
@@ -12,10 +13,10 @@ export interface PuzzleStore {
     fen: string;
 
     // list of moves to correctly solve puzzle
-    moveList?: string[];
+    moveList: string[];
 
     // puzzle data that comes from Lichess API
-    puzzle?: Puzzle;
+    puzzle: Puzzle;
 
     // whether or not the current has been solved
     solved: boolean;
@@ -28,8 +29,8 @@ export interface PuzzleStore {
 
 export const usePuzzleStore = create<PuzzleStore>((set) => ({
     fen: game.fen(),
-    moveList: undefined,
-    puzzle: undefined,
+    moveList: [],
+    puzzle: PUZZLE_LOAD_STATE,
     solved: false,
 
     setFen: (fen) => set({ fen }),

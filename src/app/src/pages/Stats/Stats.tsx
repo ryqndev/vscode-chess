@@ -5,7 +5,6 @@ export const Stats = memo(function Stats() {
     return (
         <div className={cn.container}>
             <div className={cn.stat}>0</div>
-
         </div>
     );
 });

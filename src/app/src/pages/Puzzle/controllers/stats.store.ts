@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { STORAGE_KEYS } from "../../../controllers/storage.types";
 
 export interface StatsStore {
     total: number;
@@ -24,5 +25,5 @@ export const useStatsStore = create(persist<StatsStore>((set) => ({
     incrementSolved: () => set((state) => ({ solved: state.solved + 1 })),
     incrementSkipped: () => set((state) => ({ skipped: state.skipped + 1 })),
 }), {
-    name: '@ryqndev/chess'
+    name: STORAGE_KEYS.STATS
 }));

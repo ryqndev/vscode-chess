@@ -1,5 +1,5 @@
 import { CSSProperties, useState } from "react";
-import { game } from "../../../pages/Puzzle/controllers/puzzle-store";
+import { game } from "../../../pages/Puzzle/controllers/puzzle.store";
 import { Square } from "chess.js";
 import { Piece } from "../types";
 

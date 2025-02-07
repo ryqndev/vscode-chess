@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import cn from '../Actions.module.scss';
-import { usePuzzleStore } from "../../../controllers/puzzle-store";
+import { usePuzzleStore } from "../../../controllers/puzzle.store";
 import { memo } from "react";
 import SkipIcon from './skip.svg?react';
 import NextIcon from './next.svg?react';

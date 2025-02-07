@@ -1,0 +1,29 @@
+.container {
+    margin-right: 6px;
+
+    pointer-events: all;
+
+    background-color: white;
+    border-radius: 8px;
+    width: 250px;
+    height: 150px;
+    box-sizing: border-box;
+    padding: 20px;
+
+    h3 {
+        margin: 0;
+        font-weight: normal;
+    }
+
+    input[type="checkbox"] {
+        cursor: pointer;
+    }
+
+    input[type="range"] {
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+}

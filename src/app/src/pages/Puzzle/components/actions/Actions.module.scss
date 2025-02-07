@@ -5,6 +5,7 @@
     border: 2px solid transparent;
     border-radius: 4px;
     cursor: pointer;
+    background-color: #ffffff22;
 
     transition: border-color 250ms, background-color 250ms;
 
@@ -13,7 +14,8 @@
         transition: fill 250ms;
     }
 
-    &:hover {
+    &:hover,
+    &.open {
         border-color: #00000045;
     }
 
@@ -24,4 +26,10 @@
             fill: #fff;
         }
     }
+}
+
+span {
+    background-color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
 }

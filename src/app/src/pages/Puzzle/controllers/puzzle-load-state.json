@@ -1,0 +1,34 @@
+{
+  "game": {
+    "id": "load-state",
+    "perf": {
+      "key": "rapid",
+      "name": "Rapid"
+    },
+    "rated": true,
+    "players": [
+      {
+        "name": "loading...",
+        "id": "load-a",
+        "color": "white",
+        "rating": 0
+      },
+      {
+        "name": "loading...",
+        "id": "load-b",
+        "color": "black",
+        "rating": 0
+      }
+    ],
+    "pgn": "",
+    "clock": ""
+  },
+  "puzzle": {
+    "id": "sample load",
+    "rating": 0,
+    "plays": 0,
+    "solution": [],
+    "themes": [],
+    "initialPly": 0
+  }
+}
