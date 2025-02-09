@@ -26,7 +26,9 @@ export const usePuzzle = (): PuzzleProps => {
         promoteFromSquare?: Square,
         promoteToSquare?: Square
     ) => {
+        console.log('@ryqndev here');
         if (!piece || !promoteFromSquare || !promoteToSquare || !moveList) return false;
+        console.log('@ryqndev next');
 
         const move = promoteFromSquare + promoteToSquare + piece.substring(1).toLowerCase() as PieceSymbol;
 

@@ -7,6 +7,10 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: 10px;
+    place-self: center;
+
+    height: calc(var(--height) + 45px);
+    width: 300px;
 
     transition: border-color 350ms;
 

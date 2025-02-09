@@ -11,6 +11,7 @@ export const MainPanel = memo(function MainPanel({ hoveredPos }: { hoveredPos?: 
 
     const { game, onPieceDrop, onPromotionPieceSelect, boardOrientation } = usePuzzle();
     const puzzle = usePuzzleStore(state => state.puzzle);
+    console.log('@ryqndev', puzzle.puzzle.solution);
 
     const players = useMemo(() => {
         const nextPlayers = [...puzzle.game.players];

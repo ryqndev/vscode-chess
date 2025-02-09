@@ -4,8 +4,9 @@
 }
 
 .main {
-    height: clamp(200px, calc(90vw - 249px), calc(100vh - 40px));
-    width: clamp(200px, calc(90vw - 360px), calc(100vh - 130px));
+    height: calc(var(--height) + 90px);
+    min-height: 200px;
+    width: var(--height);
     display: grid;
     grid-template-rows: 36px 1fr 36px;
     gap: 10px;

@@ -8,6 +8,11 @@
     box-sizing: border-box;
 }
 
+:root {
+    --height: clamp(200px, calc(90vw - 360px), calc(100vh - 130px));
+    --width: clamp(300px, calc(90vh - 340px), 90vw);
+}
+
 .container {
     place-self: center;
     display: grid;
@@ -15,7 +20,7 @@
 
     gap: 20px;
 
-    --height: clamp(200px, calc(90vw - 360px), calc(100vh - 130px));
+
     height: 100%;
     overflow: hidden;
     width: auto;
